@@ -24,7 +24,7 @@ fn main() {
             let y0 = ((v0.y+1.)*499 as f32/2.) as u32;
             let x1 = ((v1.x+1.)*499 as f32/2.) as u32;
             let y1 = ((v1.y+1.)*499 as f32/2.) as u32;
-            // println!("{} {} {} {}", x0, y0, x1, y1);
+            println!("{} {} {} {}", x0, y0, x1, y1);
             pop.line(x0, y0, x1, y1, WHITE);
         }
     }

@@ -30,9 +30,9 @@ impl Object {
                 v_line += 1;
                 let words: Vec<&str> = line.split_whitespace().collect();
                 self.vert.push(Vector3D::new(
-                    words[1].parse().unwrap(),
-                    words[2].parse().unwrap(),
-                    words[3].parse().unwrap(),
+                    words[1].parse::<f32>().unwrap(),
+                    words[2].parse::<f32>().unwrap(),
+                    words[3].parse::<f32>().unwrap(),
                 ));
                 // println!("{}", self.vert.last().unwrap());
             }
@@ -62,34 +62,3 @@ impl fmt::Display for Object {
         write!(f, "{}", self.filename)
     }
 }
-
-
-// if line.starts_with("f ") {
-//     f_line += 1;
-//     let mut face: [i32; 3] = [-1, -1, -1];
-//     let words: Vec<&str> = line.split_whitespace().collect();
-//     for i in 0..3 {
-//         face[i] = words[i+1].split("/").next().unwrap().parse().unwrap();
-//         face[i] -= 1;
-//     }
-//     self.facets.push(face);
-// }
-
-
-
-// if line.starts_with("f ") {
-//     f_line += 1;
-//     let words: Vec<&str> = line.split_whitespace().collect();
-//     for word in 0..3 {
-//         if word != 0 {
-//             let word: Vec<&str> = words[word].split("/").collect();
-//             // println!("{:?}", word);
-//             let x: [i32; 3] = [
-//                 word[0].parse::<i32>().unwrap() - 1,
-//                 word[1].parse::<i32>().unwrap() - 1,
-//                 word[2].parse::<i32>().unwrap() - 1,
-//             ];
-//             self.facets.push(x);
-//         }
-//     }
-// }

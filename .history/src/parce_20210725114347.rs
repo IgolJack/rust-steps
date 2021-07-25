@@ -38,13 +38,19 @@ impl Object {
             }
             if line.starts_with("f ") {
                 f_line += 1;
-                let mut face: [i32; 3] = [-1, -1, -1];
                 let words: Vec<&str> = line.split_whitespace().collect();
-                for i in 0..3 {
-                    face[i] = words[i+1].split("/").next().unwrap().parse().unwrap();
-                    face[i] -= 1;
+                for word in 0..3 {
+                    if word != 0 {
+                        let word: Vec<&str> = words[word].split("/").collect();
+                        // println!("{:?}", word);
+                        let x: [i32; 3] = [
+                            word[0].parse::<i32>().unwrap() - 1,
+                            word[1].parse::<i32>().unwrap() - 1,
+                            word[2].parse::<i32>().unwrap() - 1,
+                        ];
+                        self.facets.push(x);
+                    }
                 }
-                self.facets.push(face);
             }
         }
         println!("f: {}  v: {}", f_line, v_line)
@@ -73,23 +79,4 @@ impl fmt::Display for Object {
 //         face[i] -= 1;
 //     }
 //     self.facets.push(face);
-// }
-
-
-
-// if line.starts_with("f ") {
-//     f_line += 1;
-//     let words: Vec<&str> = line.split_whitespace().collect();
-//     for word in 0..3 {
-//         if word != 0 {
-//             let word: Vec<&str> = words[word].split("/").collect();
-//             // println!("{:?}", word);
-//             let x: [i32; 3] = [
-//                 word[0].parse::<i32>().unwrap() - 1,
-//                 word[1].parse::<i32>().unwrap() - 1,
-//                 word[2].parse::<i32>().unwrap() - 1,
-//             ];
-//             self.facets.push(x);
-//         }
-//     }
 // }

@@ -58,8 +58,6 @@ impl Drawer {
     }
 
     fn put_pixel(&mut self, x: &u32, y: &u32, color: [u8; 3]) {
-        let x = 499 - *x;
-        let y = 499 - *y;
         let g: image::Rgb<u8> =  image::Rgb(color);
         *self.image.get_pixel_mut(x, y) = g;
     }

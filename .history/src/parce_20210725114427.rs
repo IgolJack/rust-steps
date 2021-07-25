@@ -74,22 +74,3 @@ impl fmt::Display for Object {
 //     }
 //     self.facets.push(face);
 // }
-
-
-
-// if line.starts_with("f ") {
-//     f_line += 1;
-//     let words: Vec<&str> = line.split_whitespace().collect();
-//     for word in 0..3 {
-//         if word != 0 {
-//             let word: Vec<&str> = words[word].split("/").collect();
-//             // println!("{:?}", word);
-//             let x: [i32; 3] = [
-//                 word[0].parse::<i32>().unwrap() - 1,
-//                 word[1].parse::<i32>().unwrap() - 1,
-//                 word[2].parse::<i32>().unwrap() - 1,
-//             ];
-//             self.facets.push(x);
-//         }
-//     }
-// }

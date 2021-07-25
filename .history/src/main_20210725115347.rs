@@ -13,7 +13,8 @@ const WHITE: [u8; 3] = [255, 255, 255];
 fn main() {
     let mut pop = Drawer::new(500, 500);
    
-    let mut hop = Object::new("./src/obj/african_head.obj");
+    // let mut hop = Object::new("./src/obj/african_head.obj");
+    let mut hop = Object::new("./src/obj/duck.obj");
     hop.read(); 
 
     for face in &hop.facets {
