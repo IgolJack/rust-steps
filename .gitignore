@@ -1,4 +1,4 @@
-/target
-/history
-/vscode
+target/
+history/
+vscode/
 perf.data
