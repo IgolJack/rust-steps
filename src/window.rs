@@ -37,9 +37,9 @@ impl Screen {
         }
     }
 
-    fn put_pixel(&mut self, x: i32, y: i32, color: [u8; 3]) {
+    pub fn put_pixel(&mut self, x: i32, y: i32, color: [u8; 3]) {
         self.canvas.set_draw_color(Color::RGB(color[0], color[1], color[2]));
-        self.canvas.draw_point(Point::new(600 - x,600 - y)).unwrap();
+        self.canvas.draw_point(Point::new(x, y)).unwrap();
     }
 
     pub fn line(&mut self, a: [i32; 2], b: [i32; 2], color: [u8; 3]) {
