@@ -14,7 +14,10 @@ pub struct Point {
     x: i32,
     y: i32,
 }
-
+#[derive(
+    Debug,
+    Clone, Copy,
+)]
 pub struct Vector3D {
     pub x: f32,
     pub y: f32, 
@@ -36,7 +39,50 @@ impl fmt::Display for Vector3D {
         write!(f, "{} {} {}", self.x, self.y, self.z)
     }
 }
+impl ops::BitXor for Vector3D {
+    type Output = Self;
 
+    fn bitxor(self, other: Self) -> Self {
+        Self {x: self.y * other.z - self.z * other.y, y: self.z * other.x - self.x * other.z, z: self.x * other.y - self.y * other.x}
+    }
+}
+
+impl ops::Sub for Vector3D {
+    type Output = Self;
+
+    fn sub(self, other: Self) -> Self {
+        Self {x: self.x - other.x, y: self.y - other.y, z: self.z - other.z}
+    }
+}
+
+impl ops::Mul for Vector3D {
+    type Output = Self; 
+
+    fn mul(self, other: Self) -> Self {
+        Self{x: self.x * other.x, y: self.y * other.y, z: self.z * other.z}
+    }
+
+}
+
+impl ops::Mul<f32> for Vector3D {
+    type Output = Self; 
+
+    fn mul(self, other: f32) -> Self {
+        Self{x: self.x * other, y: self.y * other, z: self.z * other}
+    }
+
+}
+
+impl Vector3D {
+    pub fn norm(&self) -> f32 {
+        (self.x * self.x + self.y * self.y + self.z * self.z).sqrt()
+    }
+
+    pub fn normalize(self) -> Self{
+        let ko = 1. / self.norm();
+        Self{x: self.x * ko, y: self.y * ko, z: self.z * ko} 
+    }
+}
 
 impl ops::Add for Vector2D {
     type Output = Self;
@@ -69,13 +115,6 @@ impl Vector2D {
         Vector2D {
             x,
             y,
-        }
-    }
-
-    pub fn new_from_point(p: Point) -> Vector2D {
-        Vector2D {
-            x: p.x as f32,
-            y: p.y as f32,
         }
     }
 }

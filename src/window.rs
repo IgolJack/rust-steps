@@ -43,7 +43,7 @@ impl Screen {
     }
 
     pub fn line(&mut self, a: [i32; 2], b: [i32; 2], color: [u8; 3]) {
-        let mut  x0 = a[0];
+        let mut x0 = a[0];
         let mut y0 = a[1];
         let mut x1 = b[0];
         let mut y1 = b[1];
