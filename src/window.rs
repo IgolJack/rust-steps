@@ -8,6 +8,8 @@ use std::mem;
 pub struct Screen {
     pub canvas: sdl2::render::Canvas<sdl2::video::Window>,
     pub event_p: sdl2::EventPump,
+    pub width: u32,
+    pub height: u32,
 }
 
 impl Screen {
@@ -16,6 +18,8 @@ impl Screen {
         Screen {
             canvas: inicializate.0,
             event_p: inicializate.1,
+            width,
+            height,
         }
     }
  
@@ -37,9 +41,9 @@ impl Screen {
         }
     }
 
-    pub fn put_pixel(&mut self, x: i32, y: i32, color: [u8; 3]) {
+    pub fn put_pixel(&mut self, x: i32, y: i32, color: [u8; 3], ) {
         self.canvas.set_draw_color(Color::RGB(color[0], color[1], color[2]));
-        self.canvas.draw_point(Point::new(x, y)).unwrap();
+        self.canvas.draw_point(Point::new(self.width as i32 - x, self.height as i32 - y)).unwrap();
     }
 
     pub fn line(&mut self, a: [i32; 2], b: [i32; 2], color: [u8; 3]) {
