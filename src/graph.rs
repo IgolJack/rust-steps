@@ -78,9 +78,9 @@ impl Vector3D {
         (self.x * self.x + self.y * self.y + self.z * self.z).sqrt()
     }
 
-    pub fn normalize(self) -> Self{
-        let ko = 1. / self.norm();
-        Self{x: self.x * ko, y: self.y * ko, z: self.z * ko} 
+    pub fn normalize(&mut self) -> Vector3D{
+        *self = *self * (1. / self.norm());
+        *self
     }
 }
 
