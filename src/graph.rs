@@ -47,6 +47,14 @@ impl ops::BitXor for Vector3D {
     }
 }
 
+impl ops::Add for Vector3D {
+    type Output = Self;
+
+    fn add(self, other: Self) -> Self {
+        Self {x: self.x + other.x, y: self.y + other.y, z: self.z + other.z}
+    }
+}
+
 impl ops::Sub for Vector3D {
     type Output = Self;
 
@@ -91,6 +99,7 @@ impl ops::Add for Vector2D {
         Self {x: self.x + other.x, y: self.y + other.y}
     }
 }
+
 
 impl ops::Sub for Vector2D {
     type Output = Self;

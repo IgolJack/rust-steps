@@ -10,16 +10,19 @@ pub struct Screen {
     pub event_p: sdl2::EventPump,
     pub width: u32,
     pub height: u32,
+    pub zbufer:  Vec<f32>,
 }
 
 impl Screen {
     pub fn new(width: u32, height: u32) -> Screen {
         let inicializate = init(width, height);
+        let leng_arr = (width * height) as usize;
         Screen {
             canvas: inicializate.0,
             event_p: inicializate.1,
             width,
             height,
+            zbufer: vec![0.; leng_arr],
         }
     }
  
@@ -43,7 +46,7 @@ impl Screen {
 
     pub fn put_pixel(&mut self, x: i32, y: i32, color: [u8; 3], ) {
         self.canvas.set_draw_color(Color::RGB(color[0], color[1], color[2]));
-        self.canvas.draw_point(Point::new(self.width as i32 - x, self.height as i32 - y)).unwrap();
+        self.canvas.draw_point(Point::new(x, self.height as i32 - y)).unwrap();
     }
 
     pub fn line(&mut self, a: [i32; 2], b: [i32; 2], color: [u8; 3]) {
@@ -88,6 +91,7 @@ impl Screen {
         //let _result = child.wait().unwrap();
         //self.canvas.present();
     }
+
 }
 
 fn init(width: u32, height: u32) -> (sdl2::render::Canvas<sdl2::video::Window>, sdl2::EventPump) {
@@ -99,26 +103,3 @@ fn init(width: u32, height: u32) -> (sdl2::render::Canvas<sdl2::video::Window>, 
     canvas.clear();
     (canvas, event_pump)
 }
-
-// 'running: loop {
-//     for event in win.event_p.poll_iter() {
-//         match event {
-//             Event::Quit { .. }
-//             | Event::KeyDown {
-//                 keycode: Some(Keycode::Escape),
-//                 ..
-//             } => break 'running,
-
-//             Event::MouseButtonDown { x, y, .. } => {
-//                 let color = Color::RGB(x as u8, y as u8, 255);
-//                 let _ =win.canvas.line(lastx, lasty, x as i16, y as i16, color);
-//                 lastx = x as i16;
-//                 lasty = y as i16;
-//                 println!("mouse btn down at ({},{})", x, y);
-//                 canvas.present();
-//             }
-
-//             _ => {}
-//         }
-//     }
-// }
