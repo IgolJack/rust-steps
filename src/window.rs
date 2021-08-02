@@ -10,7 +10,7 @@ pub struct Screen {
     pub event_p: sdl2::EventPump,
     pub width: u32,
     pub height: u32,
-    pub zbufer:  Vec<f32>,
+    pub zbufer:  Vec<i32>,
 }
 
 impl Screen {
@@ -22,7 +22,7 @@ impl Screen {
             event_p: inicializate.1,
             width,
             height,
-            zbufer: vec![0.; leng_arr],
+            zbufer: vec![std::i32::MIN; leng_arr],
         }
     }
  

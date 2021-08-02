@@ -28,9 +28,9 @@ fn main() {
         let mut world_coords = vec![Vector3D { x: 0., y: 0., z: 0. }; 3];
 
         for i in 0..3 {
-            let v0  = &face.vert[facet[i] as usize];
-            world_coords[i] = *v0;
-            screen_coords.push(Vector3D{x: (v0.x + 1.) * win.width as f32 /2. , y: (v0.y + 1.) * win.height as f32 / 2., z: (v0.z + 1.)/ DEPTH as f32 / 2.});
+            let v = &face.vert[facet[i] as usize];
+            screen_coords.push(Vector3D{x: (((v.x + 1.) * (win.width /2 ) as f32) as i32) as f32, y: ((v.y + 1.) * (win.height / 2) as f32) as i32 as f32, z: ((v.z + 1.) * (DEPTH / 2) as f32) as i32 as f32});
+            world_coords[i] = *v;
         }
 
         let mut n: Vector3D = (world_coords[2] - world_coords[0])^(world_coords[1] - world_coords[0]);
@@ -66,15 +66,16 @@ fn triangle(mut a:  Vector3D, mut b: Vector3D, mut c: Vector3D,  win: &mut windo
         let mut b_vec: Vector3D = if is_half {b + (c - b) * beta} else {a + (b - a) * beta};
 
         if a_vec.x > b_vec.x {swap(&mut a_vec, &mut b_vec)};
-
+        
         for j in a_vec.x as i32 .. b_vec.x as i32 + 1 {
             let phi: f32 = if b_vec.x == a_vec.x {1.} else {(j as f32 - a_vec.x)/(b_vec.x - a_vec.x)};
             let p_vec: Vector3D = a_vec + (b_vec - a_vec) * phi;
-
-            let idx: u32 = (p_vec.x as u32 + p_vec.y as u32 * win.width) as u32;
             
-            if win.zbufer[idx as usize] < p_vec.z {
-                win.zbufer[idx as usize] = p_vec.z;
+            let idx = (j + (a.y as i32 + i) * win.width as i32) as usize;
+
+            //let idx = (p_vec.x as u32 + p_vec.y as u32 * win.width) as usize;
+            if win.zbufer[idx] < p_vec.z as i32{
+                win.zbufer[idx] = p_vec.z as i32;
                 win.put_pixel(p_vec.x as i32, p_vec.y as i32, color)
             }
         }   
